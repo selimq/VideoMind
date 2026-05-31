@@ -19,3 +19,5 @@ python demo/app.py
 ```
 
 If success, the terminal would display `Running on local URL: http://0.0.0.0:7860`. You may then visit the link via your browser.
+
+For a guided Colab walkthrough with clearer setup sections and an optional custom video upload step, open [demo/VideoMind_Inference_Colab.ipynb](/demo/VideoMind_Inference_Colab.ipynb).
