@@ -557,7 +557,7 @@ def main(video, prompt, role, max_candidates, temperature, max_new_tokens):
             yield history
 
 
-def build_demo():
+def build_demo(default_video=None, default_prompt=None, default_role=None):
     chat = gr.Chatbot(
         type='messages',
         height='70em',
@@ -566,7 +566,10 @@ def build_demo():
         placeholder='A conversation with VideoMind',
         label='VideoMind')
 
-    prompt = gr.Textbox(label='Text Prompt', placeholder='Ask a question about the video...')
+    prompt = gr.Textbox(
+        label='Text Prompt',
+        placeholder='Ask a question about the video...',
+        value=default_prompt if default_prompt is not None else '')
 
     with gr.Blocks(title=TITLE, js=JS) as demo:
         gr.HTML(LOGO)
@@ -575,13 +578,13 @@ def build_demo():
 
         with gr.Row():
             with gr.Column(scale=3):
-                video = gr.Video()
+                video = gr.Video(value=default_video if default_video is not None else None)
 
                 with gr.Group():
                     role = gr.CheckboxGroup(
                         choices=[('🗺️ Planner', 'pla'), ('🔍 Grounder', 'gnd'), ('📊 Verifier', 'ver'),
                                  ('📝 Answerer', 'ans')],
-                        value=['pla', 'gnd', 'ver', 'ans'],
+                        value=default_role if default_role is not None else ['pla', 'gnd', 'ver', 'ans'],
                         interactive=True,
                         label='Roles',
                         info='Select the role(s) you would like to activate.')
